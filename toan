@@ -97,10 +97,7 @@
         "type" : "field"
       },
       {
-        "network" : 
-          "tcp,
-          udp",
-      
+        "network" : "tcp,udp",
         "outboundTag" : "block",
         "type" : "field"
       }
