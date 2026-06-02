@@ -1,1 +1,109 @@
-vless://ee69111e-5b68-45fb-844d-fa3d713c1e26@133.117.73.45:8443?type=tcp&headerType=none&security=reality&fp=ios&sni=dengon.ezweb.ne.jp&pbk=6asoLM0mNGD7p-FX8IUS6617LczN9CSBJo5-jNWwSyQ&sid=133755f3004b9c&spx=/XKSuLd2f4wSk3vI#Phuong-Uyen
+{
+  "dns" : {
+    "queryStrategy" : "UseIPv4"
+  },
+  "inbounds" : [
+    {
+      "listen" : "127.0.0.1",
+      "port" : 10808,
+      "protocol" : "socks",
+      "settings" : {
+        "auth" : "noauth",
+        "udp" : true
+      },
+      "sniffing" : {
+        "destOverride" : [
+          "tls",
+          "quic",
+          "http"
+        ],
+        "enabled" : true,
+        "excludedDomains" : [
+
+        ],
+        "metadataOnly" : false,
+        "routeOnly" : true
+      },
+      "tag" : "socks-in"
+    },
+    {
+      "listen" : "127.0.0.1",
+      "port" : 10820,
+      "protocol" : "socks",
+      "settings" : {
+        "auth" : "noauth",
+        "udp" : true
+      },
+      "sniffing" : {
+        "destOverride" : [
+          "tls",
+          "quic",
+          "http"
+        ],
+        "enabled" : true,
+        "excludedDomains" : [
+
+        ],
+        "metadataOnly" : false,
+        "routeOnly" : true
+      },
+      "tag" : "socks-direct"
+    }
+  ],
+  "log" : {
+    "access" : "\/private\/var\/mobile\/Containers\/Shared\/AppGroup\/6F6928F3-3664-43EC-ADD2-7996A5E69A12\/Library\/Application Support\/Xray\/logs\/access.log",
+    "dnsLog" : true,
+    "loglevel" : "Warning"
+  },
+  "outbounds" : [
+    {
+      "protocol" : "freedom",
+      "tag" : "direct"
+    },
+    {
+      "protocol" : "blackhole",
+      "tag" : "block"
+    }
+  ],
+  "policy" : {
+    "levels" : {
+      "8" : {
+        "bufferSize" : 3,
+        "connIdle" : 300,
+        "downlinkOnly" : 4,
+        "handshake" : 3,
+        "uplinkOnly" : 2
+      }
+    },
+    "system" : {
+
+    }
+  },
+  "remarks" : "active",
+  "routing" : {
+    "domainStrategy" : "AsIs",
+    "rules" : [
+      {
+        "ip" : "1.1.1.1",
+        "outboundTag" : "direct",
+        "type" : "field"
+      },
+      {
+        "domain" : [
+          "pettoan.xyz"
+        ],
+        "outboundTag" : "direct",
+        "port" : 8000,
+        "type" : "field"
+      },
+      {
+        "network" : [
+          "tcp",
+          "udp"
+        ],
+        "outboundTag" : "block",
+        "type" : "field"
+      }
+    ]
+  }
+}
